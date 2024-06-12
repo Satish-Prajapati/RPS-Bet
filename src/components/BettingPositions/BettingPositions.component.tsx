@@ -17,7 +17,7 @@ const BettingPositions: React.FC = () => {
         useAtom<string>(bettingStatusAtom);
     const [userBetPositions, setUserBetPositions] =
         useAtom<BetPosition>(betPositionsAtom);
-    const [winningBet, setWinningBet] = useState<GamePosition>();
+    const [winningBet, setWinningBet] = useState<GamePosition | null>(null);
 
     const disabledPosition = useMemo(() => {
         if (userBetPositions && Object.keys(userBetPositions).length !== 2) {
@@ -53,6 +53,7 @@ const BettingPositions: React.FC = () => {
     };
 
     const handleClearBets = () => {
+        setWinningBet(null);
         setUserBetPositions({});
         setBettingStatus(BettingStatus.SELECTION);
     };
